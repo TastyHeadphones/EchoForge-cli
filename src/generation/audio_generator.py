@@ -2,8 +2,9 @@ from google import genai
 from google.genai import types
 import wave
 
+audio_client = genai.Client()
+
 def generate_audio_data(script: str) -> bytes:
-    audio_client = genai.Client()
     prompt = f"TTS the following conversation between Speaker1 and Speaker2:\n{script}"
     response = audio_client.models.generate_content(
    model="gemini-2.5-flash-preview-tts",
