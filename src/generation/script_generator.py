@@ -39,7 +39,6 @@ def generate_script(order) -> str:
         )
 
     response = chat.send_message(prompt)
-
     return response.text
 
 if __name__ == "__main__":
