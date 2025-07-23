@@ -21,6 +21,13 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
     
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    info_file_path = os.path.join(output_dir, "series_info.txt")
+    if not os.path.exists(info_file_path):
+        with open(info_file_path, 'w') as info_file:
+            info_file.write(f"Series Topic: {series_topic}\n")
+            info_file.write(f"Language: {language}\n")
+            info_file.write(f"Number of Episodes: {number_of_episodes}\n")
+            info_file.write(f"Word Count per Episode: {word_count}\n")
 
     for episode in range(1, number_of_episodes + 1):
         info = generate_script(episode)
@@ -29,7 +36,13 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
         
         info_json = json.loads(unifyng_info)
         title = info_json['podcasts'][0]['title']
+        introduction = info_json['podcasts'][0]['introduction']
         script = info_json['podcasts'][0]['script']
+        
+        # Save the script to a text file
+        info_file_path.write(f"\nEpisode {episode}:\n")
+        info_file_path.write(f"Title: {title}\n")
+        info_file_path.write(f"Introduction: {introduction}\n")
         
         # Generate relative path for audio file
         audio_filename = os.path.join(output_dir, f"{title}.wav")
