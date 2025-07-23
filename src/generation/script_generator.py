@@ -2,7 +2,7 @@ from google import genai
 from prompt.prompt_generator import create_initial_prompt_string, create_follow_up_prompt_string
 
 client = genai.Client()
-chat = client.chats.create(model="gemini-2.5-flash")
+chat = client.chats.create(model="gemini-2.5-pro")
 
 def set_podcast_series_args(series_topic: str, language: str, number_of_episodes: int, word_count: int) -> None:
     global podcast_series_args
