@@ -2,6 +2,7 @@ from google import genai
 from prompt.prompt_generator import create_initial_prompt_string, create_follow_up_prompt_string
 
 client = genai.Client()
+chat = client.chats.create(model="gemini-2.5-flash")
 
 def set_podcast_series_args(series_topic: str, language: str, number_of_episodes: int, word_count: int) -> None:
     global podcast_series_args
@@ -37,11 +38,8 @@ def generate_script(order) -> str:
             word_count=podcast_series_args["word_count"]
         )
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-    )
-    
+    response = chat.send_message(prompt)
+
     return response.text
 
 if __name__ == "__main__":
