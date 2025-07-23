@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from .audio_generator import generate_audio_file
 from .script_generator import set_podcast_series_args, generate_script
 
@@ -31,6 +32,8 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
 
     for episode in range(1, number_of_episodes + 1):
         info = generate_script(episode)
+        # sleep 30seconds to avoid rate limit issues
+        time.sleep(10)
         unifyng_info = info[7:-3]
         print(f"Episode {episode} Script:\n{unifyng_info}\n")
         
@@ -49,6 +52,7 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
         # Generate relative path for audio file
         audio_filename = os.path.join(output_dir, f"{title}.wav")
         generate_audio_file(audio_filename, script)
+        time.sleep(10)  # Sleep to avoid rate limit issues
         
         print(f"Audio file for Episode {episode} generated: {audio_filename}\n")
         print("=" * 40)
