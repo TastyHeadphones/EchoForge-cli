@@ -1,18 +1,12 @@
-from generation.script_generator import set_podcast_series_args, generate_script
+from generation.generator import generate_podcast_series
 
 def main():
-    # Example usage
-    set_podcast_series_args(
-        series_topic="The Future of AI",
+    generate_podcast_series(
+        series_topic="AI future",
         language="eng",
-        number_of_episodes=5,
-        word_count=1000
+        number_of_episodes=2,
+        word_count=50
     )
-    
-    for episode in range(1, 6):
-        script = generate_script(episode)
-        print(f"Episode {episode} Script:\n{script}\n")
-        print("=" * 40)
 
 if __name__ == "__main__": 
     main()
