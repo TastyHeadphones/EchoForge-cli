@@ -40,9 +40,11 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
         script = info_json['podcasts'][0]['script']
         
         # Save the script to a text file
-        info_file_path.write(f"\nEpisode {episode}:\n")
-        info_file_path.write(f"Title: {title}\n")
-        info_file_path.write(f"Introduction: {introduction}\n")
+        with open(info_file_path, 'a') as info_file:
+            info_file.write(f"---\n")
+            info_file.write(f"Episode {episode}:\n")
+            info_file.write(f"Title: {title}\n")
+            info_file.write(f"Introduction: {introduction}\n")
         
         # Generate relative path for audio file
         audio_filename = os.path.join(output_dir, f"{title}.wav")
