@@ -23,8 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run main.py
-        run: python src/main.py
+      - name: Export GEMINI_API_KEY and run script
+        run: |
+          python src/main.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Upload podcast_series folder
         uses: actions/upload-artifact@v4
