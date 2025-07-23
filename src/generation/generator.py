@@ -17,8 +17,10 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
     
     # Create a directory for the series topic if it doesn't exist
     
-    if not os.path.exists(series_topic):
-        os.makedirs(series_topic)
+    output_dir = "podcast_series"
+    
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     for episode in range(1, number_of_episodes + 1):
         info = generate_script(episode)
@@ -30,7 +32,7 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
         script = info_json['podcasts'][0]['script']
         
         # Generate relative path for audio file
-        audio_filename = os.path.join(series_topic, f"{title}.wav")
+        audio_filename = os.path.join(output_dir, f"{title}.wav")
         generate_audio_file(audio_filename, script)
         
         print(f"Audio file for Episode {episode} generated: {audio_filename}\n")
