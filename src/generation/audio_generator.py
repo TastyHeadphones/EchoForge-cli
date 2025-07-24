@@ -1,6 +1,7 @@
 from google import genai
 from google.genai import types
 import wave
+import subprocess
 
 audio_client = genai.Client()
 
@@ -37,15 +38,23 @@ def generate_audio_data(script: str) -> bytes:
 )
     return response.candidates[0].content.parts[0].inline_data.data
 
-def generate_audio_file(filename: str, script: str) -> None:
-    audio_data = generate_audio_data(script)
-    with wave.open(filename, 'wb') as audio_file:
-        audio_file.setnchannels(1)
-        audio_file.setsampwidth(2)
-        audio_file.setframerate(24000)
-        audio_file.writeframes(audio_data)
-    print(f"Audio file '{filename}' generated successfully.")
+# def generate_audio_file(filename: str, script: str) -> None:
+#     audio_data = generate_audio_data(script)
+#     with wave.open(filename, 'wb') as audio_file:
+#         audio_file.setnchannels(1)
+#         audio_file.setsampwidth(2)
+#         audio_file.setframerate(24000)
+#         audio_file.writeframes(audio_data)
+#     print(f"Audio file '{filename}' generated successfully.")
 
+def generate_audio_file(filename: str, script_file_name: str) -> None:
+    subprocess.run([
+        "python", "third_party/higgs-audio/examples/generation.py",
+        "--transcript", script_file_name,
+        "--seed", "12345",
+        "--out_path", filename
+    ], check=True)
+    
 if __name__ == "__main__":
     # Example usage
     script = "Speaker1: Hello, how are you?\nSpeaker2: I'm fine, thank you!"

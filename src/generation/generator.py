@@ -54,8 +54,7 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
         with open(script_filename, 'w', encoding='utf-8') as script_file:
             script_file.write(script)
         audio_filename = os.path.join(output_dir, f"{title}.wav")
-        generate_audio_file(audio_filename, script)
-        time.sleep(10)  # Sleep to avoid rate limit issues
+        generate_audio_file(audio_filename, script_filename)
         
         print(f"Audio file for Episode {episode} generated: {audio_filename}\n")
         print("=" * 40)

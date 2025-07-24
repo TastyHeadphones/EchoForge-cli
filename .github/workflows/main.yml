@@ -18,12 +18,19 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
+      - name: Clone Higgs Audio into subfolder
+        run: |
+          mkdir -p third_party
+          git clone https://github.com/boson-ai/higgs-audio.git third_party/higgs-audio
+
+      - name: Install all dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install -r third_party/higgs-audio/requirements.txt
+          pip install -e third_party/higgs-audio
 
-      - name: Export GEMINI_API_KEY and run script
+      - name: Run main script (calls generation.py internally)
         run: |
           python src/main.py
         env:
