@@ -50,6 +50,9 @@ def generate_podcast_series(series_topic: str, language: str, number_of_episodes
             info_file.write(f"Introduction: {introduction}\n")
         
         # Generate relative path for audio file
+        script_filename = os.path.join(output_dir, f"{title}.txt")
+        with open(script_filename, 'w', encoding='utf-8') as script_file:
+            script_file.write(script)
         audio_filename = os.path.join(output_dir, f"{title}.wav")
         generate_audio_file(audio_filename, script)
         time.sleep(10)  # Sleep to avoid rate limit issues

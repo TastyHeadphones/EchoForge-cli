@@ -34,7 +34,7 @@ The JSON object must follow this exact structure:
     {{
       "title": "The title for this specific episode, including its part number.",
       "introduction": "A brief, engaging introduction to this episode.",
-      "script": "The full podcast script as a single string. It must contain dialogue for two speakers, labeled 'Speaker 1' and 'Speaker 2'. Each line of dialogue must start with the speaker's label and be separated by a newline character (\n)."
+      "script": "The full podcast script as a single string. It must contain dialogue for two speakers, labeled '[SPEAKER0]' and '[SPEAKER1]'. Each line of dialogue must start with the speaker's label,like '[SPEAKER0]Dad, we're pals, right?[SPEAKER1]Right.' and use \n to separate lines."
     }}
   ]
 }}
@@ -76,7 +76,7 @@ The JSON object must follow this exact structure:
     {{
       "title": "The title for this specific episode, including its part number.",
       "introduction": "A brief, engaging introduction to this episode.",
-      "script": "The full podcast script as a single string. It must contain dialogue for two speakers, labeled 'Speaker 1' and 'Speaker 2'. Each line of dialogue must start with the speaker's label and be separated by a newline character (\n)."
+      "script": "The full podcast script as a single string. It must contain dialogue for two speakers, labeled '[SPEAKER0]' and '[SPEAKER1]'. Each line of dialogue must start with the speaker's label,like '[SPEAKER0]Dad, we're pals, right?[SPEAKER1]Right.' and use \n to separate lines."
     }}
   ]
 }}
